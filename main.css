@@ -1,0 +1,87 @@
+/*# sourceMappingURL=main.css.map */
+
+/* Background*/
+
+body {
+  margin: 0;
+  font-family: "Noto Serif", serif;
+  background-color: #e1bee7;
+}
+
+.header {
+  text-align: center;
+  padding: 2rem;
+}
+
+.title {
+  font-family: "Momo Signature";
+  font-size: 3rem;
+  color: #24148c;
+}
+
+/* Lista vertical */
+.usersList {
+  display: flex;
+  flex-direction: column; /* UNO DEBAJO DEL OTRO */
+  gap: 2rem;
+  padding: 2rem;
+  list-style: none;
+  max-width: 500px;
+  margin: auto;
+}
+
+/* Tarjeta */
+.userCard {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 15px;
+  list-style: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+/* Imagen redonda */
+.userCard img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+/* Nombre */
+.userCard {
+  margin: 0.5rem 0 1rem;
+  color: #4a148c;
+}
+
+/* Lista info */
+.usersfeatures {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  color: #555;
+  display: grid;
+  gap: 0.3rem;
+}
+
+main h2 {
+  text-align: center;
+  color: #4a148c;
+  margin-top: 1rem;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  align-items: flex-end;
+  margin-left: auto;
+}
+
+.buttons button {
+  width: 120px;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.8rem;
+}
