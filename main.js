@@ -24,13 +24,13 @@ console.log(btnLoad);
 //};
 //DEJO ESTO COMENTADO.
 
-//NECESITAMOS UN BUCLE QUE RECORRA CADA UNO DE LOS OBJETOS DEL ARRAY STARSHIPS
+//NECESITAMOS UN BUCLE QUE RECORRA CADA UNO DE LOS OBJETOS DEL ARRAY
 
 function renderOneUser(oneUser) {
-  const friendClass = oneUser.isFriend ? "friend" : ""; // si es amigo → clase CSS
+  const friendClass = oneUser.isFriend ? "friend" : "";
 
   const html = `
-<li class="userCard">
+<li class="userCard ${friendClass}" data-id="${oneUser.login.uuid}">
         <img src="${oneUser.picture.medium}" alt="Userphoto" />
         <h3>${oneUser.name.first} ${oneUser.name.last}</h3>
         <ul class="usersfeatures">
