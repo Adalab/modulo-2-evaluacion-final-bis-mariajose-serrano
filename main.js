@@ -27,6 +27,8 @@ console.log(btnLoad);
 //NECESITAMOS UN BUCLE QUE RECORRA CADA UNO DE LOS OBJETOS DEL ARRAY STARSHIPS
 
 function renderOneUser(oneUser) {
+  const friendClass = oneUser.isFriend ? "friend" : ""; // si es amigo → clase CSS
+
   const html = `
 <li class="userCard">
         <img src="${oneUser.picture.medium}" alt="Userphoto" />
@@ -94,27 +96,46 @@ renderAllUsers(usersArray);
 // Éstos son los eventos a los que reacciona la página
 // Los más comunes son: click (en botones, enlaces), input (en ídem) y submit (en form)
 
+//para marcar en rosa como amigo
+usersList.addEventListener("click", marcarAmigo);
+
+function marcarAmigo(event) {
+  const li = event.target.closest(".userCard");
+  if (!li) return;
+
+  const clickedId = li.dataset.id;
+
+  const clickedUser = usersArray.find((user) => user.login.uuid === clickedId);
+
+  if (clickedUser) {
+    clickedUser.isFriend = true; // marcado ✔
+    console.log("Marcado como amigo:", clickedUser);
+
+    renderAllUsers(usersArray); // ← REPINTAR EL LISTADO
+  }
+}
+
 // Sacamos la info del Local Storage
-
-const dataInLS = JSON.parse(localStorage.getItem("usersBackup") || "[]");
-
-//SI ya tenemos la variable en el LS
-
 //si NO si no esta esta variable creada en el LS hacemos Fetch y guardamos datos en el LS.
 
-if (dataInLS === null) {
+// Leer LS al cargar
+const dataInLS = JSON.parse(localStorage.getItem("usersBackup") || "[]");
+
+if (dataInLS.length === 0) {
+  // NO HAY DATOS → LOS CARGO DE LA API
   fetch("https://randomuser.me/api/?results=10")
     .then((res) => res.json())
-    .then((responseData) => {
-      console.log(responseData.results); // AQUÍ están los usuarios
-
-      //Guardamos en nuestra variable del código
-      //const usersArray = responseData.results;
-
-      //Guardamos en el local storage
-
-      localStorage.setItem("usersBackup", JSON.stringify(usersArray));
-
-      renderAllUsers(usersArray); // Pintas todos los usuarios
+    .then((data) => {
+      usersArray = data.results; // guardo en array global
+      renderAllUsers(usersArray); // pinto
+      localStorage.setItem(
+        // guardo en LS
+        "usersBackup",
+        JSON.stringify(usersArray)
+      );
     });
+} else {
+  // SÍ HAY DATOS → LOS CARGO DE LS
+  usersArray = dataInLS;
+  renderAllUsers(usersArray);
 }

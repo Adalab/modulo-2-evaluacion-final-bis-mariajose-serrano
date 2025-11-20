@@ -85,3 +85,12 @@ main h2 {
   padding: 0.4rem 0.6rem;
   font-size: 0.8rem;
 }
+
+.friend {
+  background-color: pink;
+}
+.userCard {
+  padding: 10px;
+  margin-bottom: 8px;
+  border: 1px solid #ccc;
+}
