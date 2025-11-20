@@ -99,7 +99,12 @@ fetch("https://randomuser.me/api/?results=10")
   .then((responseData) => {
     console.log(responseData.results); // AQUÍ están los usuarios
 
-    const usersArray = responseData.results;
+    //Guardamos en nuestra variable del código
+    //const usersArray = responseData.results;
+
+    //Guardamos en el local storage
+
+    localStorage.setItem("usersBackup", JSON.stringify(usersArray));
 
     renderAllUsers(usersArray); // Pintas todos los usuarios
   });
