@@ -94,17 +94,27 @@ renderAllUsers(usersArray);
 // Éstos son los eventos a los que reacciona la página
 // Los más comunes son: click (en botones, enlaces), input (en ídem) y submit (en form)
 
-fetch("https://randomuser.me/api/?results=10")
-  .then((res) => res.json())
-  .then((responseData) => {
-    console.log(responseData.results); // AQUÍ están los usuarios
+// Sacamos la info del Local Storage
 
-    //Guardamos en nuestra variable del código
-    //const usersArray = responseData.results;
+const dataInLS = JSON.parse(localStorage.getItem("usersBackup") || "[]");
 
-    //Guardamos en el local storage
+//SI ya tenemos la variable en el LS
 
-    localStorage.setItem("usersBackup", JSON.stringify(usersArray));
+//si NO si no esta esta variable creada en el LS hacemos Fetch y guardamos datos en el LS.
 
-    renderAllUsers(usersArray); // Pintas todos los usuarios
-  });
+if (dataInLS === null) {
+  fetch("https://randomuser.me/api/?results=10")
+    .then((res) => res.json())
+    .then((responseData) => {
+      console.log(responseData.results); // AQUÍ están los usuarios
+
+      //Guardamos en nuestra variable del código
+      //const usersArray = responseData.results;
+
+      //Guardamos en el local storage
+
+      localStorage.setItem("usersBackup", JSON.stringify(usersArray));
+
+      renderAllUsers(usersArray); // Pintas todos los usuarios
+    });
+}
