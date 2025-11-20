@@ -96,7 +96,8 @@ renderAllUsers(usersArray);
 // Éstos son los eventos a los que reacciona la página
 // Los más comunes son: click (en botones, enlaces), input (en ídem) y submit (en form)
 
-//para marcar en rosa como amigo
+//para MARCAR EN ROSA COMO AMIGO !!!!!
+
 usersList.addEventListener("click", marcarAmigo);
 
 function marcarAmigo(event) {
@@ -138,4 +139,15 @@ if (dataInLS.length === 0) {
   // SÍ HAY DATOS → LOS CARGO DE LS
   usersArray = dataInLS;
   renderAllUsers(usersArray);
+}
+
+//BOTON PARA GUARDAR USUARIOS !!!
+
+const saveBtn = document.querySelector(".btn-save");
+
+btnSave.addEventListener("click", saveUsersToLocalStorage);
+
+function saveUsersToLocalStorage() {
+  localStorage.setItem("usersBackup", JSON.stringify(usersArray));
+  console.log("Usuarios guardados:", usersArray);
 }
