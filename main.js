@@ -1,5 +1,8 @@
 "use strict";
 
+//con esto siempre que recargue la pagina me da 10 nuevos usuarios
+localStorage.removeItem("usersBackup");
+
 // SECCIÓN DE QUERY-SELECTOR
 // Éstos son los elementos que nos traemos de la página HTML y usamos en el código
 
@@ -109,7 +112,7 @@ function marcarAmigo(event) {
   const clickedUser = usersArray.find((user) => user.login.uuid === clickedId);
 
   if (clickedUser) {
-    clickedUser.isFriend = true; // marcado ✔
+    clickedUser.isFriend = true; // marcado
     console.log("Marcado como amigo:", clickedUser);
 
     renderAllUsers(usersArray); // ← REPINTAR EL LISTADO
@@ -150,4 +153,22 @@ btnSave.addEventListener("click", saveUsersToLocalStorage);
 function saveUsersToLocalStorage() {
   localStorage.setItem("usersBackup", JSON.stringify(usersArray));
   console.log("Usuarios guardados:", usersArray);
+}
+
+function loadUsersFromLocalStorage() {
+  // Leer del localStorage (si no existe, devuelve [])
+  const dataInLS = JSON.parse(localStorage.getItem("usersBackup") || "[]");
+
+  if (dataInLS.length === 0) {
+    console.log("No hay datos guardados en localStorage");
+    return;
+  }
+
+  // Sobrescribir el array global
+  usersArray = dataInLS;
+
+  // Volver a pintar
+  renderAllUsers(usersArray);
+
+  console.log("Usuarios recuperados:", usersArray);
 }
