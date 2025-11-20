@@ -99,6 +99,8 @@ renderAllUsers(usersArray);
 // Éstos son los eventos a los que reacciona la página
 // Los más comunes son: click (en botones, enlaces), input (en ídem) y submit (en form)
 
+btnLoad.addEventListener("click", loadUsersFromLocalStorage);
+
 //para MARCAR EN ROSA COMO AMIGO !!!!!
 
 usersList.addEventListener("click", marcarAmigo);
