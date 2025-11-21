@@ -1,7 +1,7 @@
 "use strict";
 
 //con esto siempre que recargue la pagina me da 10 nuevos usuarios
-localStorage.removeItem("usersBackup");
+//localStorage.removeItem("usersBackup");
 
 // SECCIÓN DE QUERY-SELECTOR
 // Éstos son los elementos que nos traemos de la página HTML y usamos en el código
@@ -75,7 +75,7 @@ usersList.innerHTML = html;
 
 function renderAllUsers(usersArray) {
   if (usersArray.lenght === 0) {
-    usersList.innerHTML = "<li>No hay naves!</li>";
+    usersList.innerHTML = "<li>No hay tarjetas!</li>";
   } else {
     //El array Users si tiene objetos
   }
@@ -124,27 +124,14 @@ function marcarAmigo(event) {
 // Sacamos la info del Local Storage
 //si NO si no esta esta variable creada en el LS hacemos Fetch y guardamos datos en el LS.
 
-// Leer LS al cargar
-const dataInLS = JSON.parse(localStorage.getItem("usersBackup") || "[]");
+// NO HAY DATOS → LOS CARGO DE LA API
 
-if (dataInLS.length === 0) {
-  // NO HAY DATOS → LOS CARGO DE LA API
-  fetch("https://randomuser.me/api/?results=10")
-    .then((res) => res.json())
-    .then((data) => {
-      usersArray = data.results; // guardo en array global
-      renderAllUsers(usersArray); // pinto
-      localStorage.setItem(
-        // guardo en LS
-        "usersBackup",
-        JSON.stringify(usersArray)
-      );
-    });
-} else {
-  // SÍ HAY DATOS → LOS CARGO DE LS
-  usersArray = dataInLS;
-  renderAllUsers(usersArray);
-}
+fetch("https://randomuser.me/api/?results=10")
+  .then((res) => res.json())
+  .then((data) => {
+    usersArray = data.results; // guardo en array global
+    renderAllUsers(usersArray); // pinto
+  });
 
 //BOTON PARA GUARDAR USUARIOS !!!
 
